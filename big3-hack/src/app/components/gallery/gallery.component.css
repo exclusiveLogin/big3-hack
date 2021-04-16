@@ -1,0 +1,9 @@
+:host{
+    display: flex;
+    flex-wrap: wrap;
+}
+.photo{
+    width: 150px;
+    height: 200px;
+    border-radius: 5px;
+}
