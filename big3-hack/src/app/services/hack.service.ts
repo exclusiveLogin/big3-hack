@@ -9,7 +9,7 @@ import {debounceTime, delay} from 'rxjs/operators';
 export class HackService {
 
     attempTrottler$ = new Subject();
-    onAttemp$ = this.attempTrottler$.pipe(debounceTime(500));
+    onAttemp$ = this.attempTrottler$.pipe(debounceTime(250));
     constructor(private api: ApiService) {
         console.log('HackService:', this);
         this.onAttemp$.subscribe(() => !this.finish && this.attemp());
@@ -68,6 +68,7 @@ export class HackService {
             console.log('FINISHED:', this.fineGroups);
             this.onProgressInGroups$.next(100);
             this.onProgressInAll$.next(100);
+            // f.d.t1 = 'Поздравляем, '
             this.onLog$.next(JSON.stringify(f));
         });
 
@@ -86,14 +87,12 @@ export class HackService {
             this.api.sendData(data);
             // @ts-ignore
             const prc = +this.selectedUser / Math.max(...this.iterrationUsersIds.map(id => +id)) * 100;
-            console.log("prc: ", prc);
             this.onProgressInGroups$.next(prc);
         }
 
     }
 
     private iterationDone(): void {
-        console.log('NEXT iteration', this.fineGroups);
         if (this.activeGroup.length) this.fineGroups.push([].concat(...this.activeGroup));
         this.activeGroup = [];
         // @ts-ignore

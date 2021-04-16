@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {HackService} from 'src/app/services/hack.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {HackService} from 'src/app/services/hack.service';
     templateUrl: './statistic.component.html',
     styleUrls: ['./statistic.component.css']
 })
-export class StatisticComponent implements OnInit {
+export class StatisticComponent implements OnInit, AfterViewInit {
 
     constructor(public hack: HackService) {
     }
@@ -17,6 +17,16 @@ export class StatisticComponent implements OnInit {
     progressGroup = 0;
 
     @ViewChild('log') log: ElementRef;
+
+    ngAfterViewInit(): void {
+        this.log.nativeElement.scrollBehavior = 'smooth';
+        this.hack.onLog$.subscribe(logStr => {
+            const el = document.createElement('p');
+            el.innerHTML = logStr;
+            this.log.nativeElement.insertBefore(el, null);
+            this.log.nativeElement.scrollTop = this.log.nativeElement.scrollHeight;
+        });
+    }
 
     ngOnInit(): void {
         this.hack.ledWSping$.subscribe(() => {
@@ -35,13 +45,6 @@ export class StatisticComponent implements OnInit {
 
         this.hack.onProgressInAll$.subscribe((val) => {
             this.progressAll = val;
-        });
-
-        this.hack.onLog$.subscribe(logStr => {
-            const el = document.createElement('p');
-            el.innerHTML = logStr;
-            this.log.nativeElement.insertBefore(el, null);
-            el.scrollIntoView({behavior: 'smooth'});
         });
     }
 

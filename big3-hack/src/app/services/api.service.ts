@@ -24,7 +24,7 @@ export interface IFinishInfo extends IData {
 }
 
 export interface IUserInfo {
-    name: string;
+    n: string;
     i: number;
 }
 

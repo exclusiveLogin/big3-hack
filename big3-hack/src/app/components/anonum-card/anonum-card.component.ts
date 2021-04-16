@@ -14,6 +14,9 @@ export class AnonumCardComponent implements OnInit {
     @Input() set description(value){
         this.pdescription = this.b64DecodeUnicode(value);
     }
+    @Input() public name = 'Аноним';
+    @Input() public photo = 0;
+
     b64DecodeUnicode(str): string {
         return decodeURIComponent(Array.prototype.map.call(atob(str), (c) => {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);

@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "docker:build": "npm i && docker build -t exclusivelogin/big3-hack .",
+    "docker:publish": "npm run docker:build && docker login && docker push exclusivelogin/big3-hack",
+    "docker:run": "docker pull exclusivelogin/big3-hack && docker run --rm -d -p 8282:80 exclusivelogin/big3-hack"
   },
   "private": true,
   "dependencies": {

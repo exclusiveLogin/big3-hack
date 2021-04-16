@@ -1,1 +1,1 @@
-<app-anonum-card class="col-6" *ngFor="let user of users | async" [description]="user"></app-anonum-card>
+<app-anonum-card class="col-4" *ngFor="let user of users | async; let idx = index" [description]="user" [name]="getNameById(idx+1)" [photo]="getPhotoByIdx(idx+1)"></app-anonum-card>
