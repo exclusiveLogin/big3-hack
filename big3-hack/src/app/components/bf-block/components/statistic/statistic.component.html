@@ -1,1 +1,32 @@
-<p>statistic works!</p>
+<div class="row">
+    <div class="col-6">
+        <p>Количество попыток: <span>{{hack.countAttempsAll$ | async}}</span></p>
+        <p>Количество успешных попыток: <span>{{hack.countAttempsSuccess$ | async}}</span></p>
+
+    </div>
+
+    <div class="col-6">
+        <p>Количество успешно собранных групп: <span>{{hack.countGroups$ | async}}</span></p>
+        <p>Количество ошибочный попыток: <span>{{hack.countAttempsDenied$ | async}}</span></p>
+    </div>
+
+    <div class="col-6">
+        <i class="led" [class.active]="ledWS"></i><span>Hearthbeat WS</span>
+    </div>
+
+    <div class="col-6">
+        <i class="led" [class.active]="ledAttemp"></i><span>Active attemp WS</span>
+    </div>
+
+    <div class="col-12">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" [style]="'width:' + progressAll + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" [style]="'width:' + progressGroup + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <div class="col-12 log" #log></div>
+</div>
+

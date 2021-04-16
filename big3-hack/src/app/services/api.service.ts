@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {filter, map, mapTo} from 'rxjs/operators';
+import {filter, map, mapTo, shareReplay} from 'rxjs/operators';
 
 export interface IData {
     t: string;
@@ -14,6 +14,12 @@ export interface IInitDataUserInfo extends IData {
 export interface INamedDataUserInfo extends IData {
     d: {
         [key: number]: IUserInfo
+    };
+}
+export interface IFinishInfo extends IData {
+    d: {
+        t0: string;
+        t1: string;
     };
 }
 
@@ -38,6 +44,7 @@ export class ApiService {
     onInitDataReceive$: Observable<string[]> = this.onDataReceive$.pipe(
         filter((data: IInitDataUserInfo) => data?.t === 'pi'),
         map(data => data.d),
+        shareReplay(1),
     );
     onAttempResultReceive$: Observable<INamedDataUserInfo> = this.onDataReceive$.pipe(
         filter(data => data?.t === 'pc')
@@ -50,10 +57,21 @@ export class ApiService {
         filter(data => !data?.d),
         mapTo(null),
     );
-    onUsersGroupDataReceive$: Observable<{ [key: number]: IUserInfo }> = this.onAttempResultReceive$.pipe(
+    onUsersGroupDataReceive$: Observable<{ [key: number]: IUserInfo }> = this.onDataReceive$.pipe(
         filter(data => data?.t === 'pni'),
         map((data) => data.d)
     );
+    onFinish$: Observable<IFinishInfo> = this.onDataReceive$.pipe(
+        filter(data => data?.t === 'f'),
+        map((data) => data.d)
+    );
+
+    onPing$: Observable<null> = this.onDataReceive$.pipe(
+        filter(data => data?.t === 'p'),
+        mapTo(null),
+    );
+
+
     constructor() {
         this.ws = new WebSocket('wss://anjelika-petrova.com/ws-big5-private:3001');
 
@@ -72,7 +90,7 @@ export class ApiService {
     }
 
     sendData(data: any): void {
-        this.ws.send(data);
+        this.ws.send(JSON.stringify(data));
     }
 
 }

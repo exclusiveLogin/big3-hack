@@ -1,0 +1,19 @@
+.led{
+    width: 10px;
+    height: 10px;
+    background-color: darkslategrey;
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin-right: 10px;
+}
+.led.active{
+    background-color: greenyellow;
+}
+.progress{
+    margin-top: 5px;
+}
+.log{
+    height: 200px;
+    border: 2px grey dashed;
+    overflow-y: hidden;
+}

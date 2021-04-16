@@ -9,6 +9,7 @@ import { BfBlockComponent } from './components/bf-block/bf-block.component';
 import { StatisticComponent } from './components/bf-block/components/statistic/statistic.component';
 import { GroupsComponent } from './components/bf-block/components/groups/groups.component';
 import { AttempTableComponent } from './components/bf-block/components/attemp-table/attemp-table.component';
+import { AnonumCardComponent } from './components/anonum-card/anonum-card.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AttempTableComponent } from './components/bf-block/components/attemp-ta
     BfBlockComponent,
     StatisticComponent,
     GroupsComponent,
-    AttempTableComponent
+    AttempTableComponent,
+    AnonumCardComponent
   ],
   imports: [
     BrowserModule

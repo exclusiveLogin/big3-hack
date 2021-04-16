@@ -2,7 +2,10 @@
     display: flex;
 }
 .img{
-    width: 150px;
-    height: 200px;
+    width: 85px;
+    height: 85px;
     background-size: cover;
+}
+.unused {
+    opacity: 40%;
 }

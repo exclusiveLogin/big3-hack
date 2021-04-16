@@ -1,1 +1,1 @@
-<app-photo class="photo" *ngFor="let id of photosIds" [currentPhoto]="id"></app-photo>
+<app-photo class="photo" *ngFor="let id of photosIds" [currentPhoto]="id" [unused]="!isUsed(id)"></app-photo>
