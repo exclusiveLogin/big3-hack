@@ -7,15 +7,15 @@
 
     <div class="col-6">
         <p>Количество успешно собранных групп: <span>{{hack.countGroups$ | async}}</span></p>
-        <p>Количество ошибочный попыток: <span>{{hack.countAttempsDenied$ | async}}</span></p>
+        <p>Количество ошибочных попыток: <span>{{hack.countAttempsDenied$ | async}}</span></p>
     </div>
 
     <div class="col-6">
-        <i class="led" [class.active]="ledWS"></i><span>Hearthbeat WS</span>
+        <i class="led" [class.active]="ledWS"></i><span>Heartbeat WS</span>
     </div>
 
     <div class="col-6">
-        <i class="led" [class.active]="ledAttemp"></i><span>Active attemp WS</span>
+        <i class="led" [class.active]="ledAttemp"></i><span>Active attempt WS</span>
     </div>
 
     <div class="col-12">
