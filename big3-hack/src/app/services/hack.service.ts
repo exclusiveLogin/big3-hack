@@ -9,7 +9,7 @@ import {debounceTime, delay} from 'rxjs/operators';
 export class HackService {
 
     attempTrottler$ = new Subject();
-    onAttemp$ = this.attempTrottler$.pipe(debounceTime(250));
+    onAttemp$ = this.attempTrottler$.pipe(debounceTime(1000));
     constructor(private api: ApiService) {
         console.log('HackService:', this);
         this.onAttemp$.subscribe(() => !this.finish && this.attemp());
